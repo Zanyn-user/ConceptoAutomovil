@@ -5,6 +5,8 @@ import ec.edu.espoch.conceptoautomovil.tipoAutomovil.TipoAutomovil;
 import ec.edu.espoch.conceptoautomovil.tipoCombustible.TipoCombustible;
 
 public class Automovil {
+    
+    //ATRIBUTOS//
 
     private String marca;
     private int modelo;
@@ -15,7 +17,9 @@ public class Automovil {
     private int numAsientos;
     private double velMaxima;
     private Color color;
-    private double velActual =0;
+    private double velActual = 0;
+    
+    //CONSTRUCTOR//
 
     public Automovil(String marca, int modelo, double motor, TipoCombustible tipoCombustible, TipoAutomovil tipoAutomovil, int numPuertas, int numAsientos, double velMaxima, Color color, double velActual) {
         this.marca = marca;
@@ -29,6 +33,9 @@ public class Automovil {
         this.color = color;
         this.velActual = velActual;
     }
+    
+    
+    //GET Y SET DE CADA ATRIBUTO//
 
     public String getMarca() {
         return marca;
@@ -109,11 +116,51 @@ public class Automovil {
     public void setVelActual(double velActual) {
         this.velActual = velActual;
     }
-    
-    
-    
-    
-    
-    
-}
 
+    // MÉTODOS PARA ACELERAR, DESACELERAR Y FRENAR//
+    public void acelerar(int incremento) {
+        if (velActual + incremento <= velMaxima) {
+            velActual = velActual + incremento;
+        } else {
+            System.out.println("¡No puedes exceder la velocidad máxima permitida!");
+        }
+    }
+
+    public void desacelerar(int decremento) {
+        if (velActual - decremento >= 0) {
+            velActual = velActual - decremento;
+        } else {
+            System.out.println("¡La velocidad no puede ser negativa!");
+        }
+    }
+
+    public void frenar() {
+        velActual = 0;
+
+    }
+
+    //METODO PARA CALCLULAR EL TIEMPO ESTIMADO DE LLEGADA//
+    public double calcularTiempoLlegada(double distancia) {
+        if (velActual > 0) {
+            return distancia / velActual;
+        } else {
+            System.out.println("El vehículo está detenido.");
+            return -1;
+        }
+    }
+
+    //MÉTODO PARA MOSTRAR ATRIBUTOS//
+    public void mostrarAtributos() {
+        System.out.println("Marca del automovil: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Motor: " + motor + " Litros");
+        System.out.println("Tipo de combustible : " + tipoCombustible);
+        System.out.println("Tipo de automovil: " + tipoAutomovil);
+        System.out.println("Numero de puertas: " + numPuertas);
+        System.out.println("Cantidad de asientos: " + numAsientos);
+        System.out.println("Velocidad Maxima: " + velMaxima+ "Km/h");
+        System.out.println("Color: " + color);
+        System.out.println("Velocidad Actual: " + velActual+ "Km/h");
+    }
+
+}
